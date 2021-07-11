@@ -6,15 +6,49 @@
     android:background="@drawable/black"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Simple To-Do List"
+        app:titleTextColor="@color/white" />
+
+<!--    <Button-->
+<!--        android:id="@+id/deleteAllBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:backgroundTint="#F44336"-->
+<!--        android:text="DELETE ALL"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/Toolbar"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/Toolbar"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/Toolbar"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:onClick="onDeleteAllItems"/>-->
+
     <ListView
+        android:id="@+id/lvItems"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lvItems"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/btnAddItem" >
-    </ListView>
+        android:layout_above="@+id/btnAddItem"
+        android:layout_below="@+id/Toolbar"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="false"
+        android:visibility="visible" />
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/floatingActionButton"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:clickable="true"-->
+<!--            android:src="@drawable/black"-->
+<!--            android:layout_below="@+id/lvItems"-->
+<!--            android:layout_above="@+id/btnAddItem"/>-->
 
     <EditText
         android:layout_width="wrap_content"
@@ -37,7 +71,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:text="Add Item"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:backgroundTint="#F44336"
         android:onClick="onAddItem"/>
 

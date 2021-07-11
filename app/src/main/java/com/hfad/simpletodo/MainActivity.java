@@ -1,9 +1,9 @@
 package com.hfad.simpletodo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
         lvItems.setAdapter(itemsAdapter);
         //items.add("Add Your List Of Items");
         setupListViewListener();
+
     }
 
     private void setupListViewListener() {
@@ -45,14 +46,22 @@ public class MainActivity extends Activity {
                 new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> adapter, View item, int pos, long id) {
+                        AlertDialog.Builder adb=new AlertDialog.Builder(MainActivity.this);
+                        adb.setTitle("Delete?");
+                        adb.setMessage("Are you sure you want to delete Item Number " + pos +"?");
+                        final int positionToRemove = pos;
                         Context context = getApplicationContext();
-                        Toast.makeText(context,"Item Removed!",Toast.LENGTH_LONG).show();
-                        items.remove(pos);
-                        itemsAdapter.notifyDataSetChanged();
+                        adb.setNegativeButton("Cancel", null);
+                        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(context,"Item Removed!",Toast.LENGTH_LONG).show();
+                                items.remove(positionToRemove);
+                                itemsAdapter.notifyDataSetChanged();
+                            }});
+                        adb.show();
                         writeItems();
                         return true;
                     }
-
                 });
     }
 
@@ -85,6 +94,22 @@ public class MainActivity extends Activity {
         etNewItem.setText("");
         writeItems();
     }
+
+//    public void onDeleteAllItems(View v,int position){
+//        EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
+//        if(items.size()>0) {
+//            if (!etNewItem.getText().toString().isEmpty()) {
+//                items.clear();
+//                itemsAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, items);
+//                lvItems.setAdapter(itemsAdapter);
+//                Toast.makeText(MainActivity.this, "All Items Have Been Deleted!", Toast.LENGTH_LONG).show();
+//                itemsAdapter.notifyDataSetChanged();
+//                items.remove(position);
+//            }
+//        } else {
+//            Toast.makeText(MainActivity.this, "There is nothing to delete:(", Toast.LENGTH_LONG).show();
+//        }
+//    }
 
 
     @Override
