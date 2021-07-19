@@ -48,13 +48,13 @@ public class MainActivity extends Activity {
                     public boolean onItemLongClick(AdapterView<?> adapter, View item, int pos, long id) {
                         AlertDialog.Builder adb=new AlertDialog.Builder(MainActivity.this);
                         adb.setTitle("Delete?");
-                        adb.setMessage("Are you sure you want to delete Item Number " + pos +"?");
+                        adb.setMessage("Are you sure you want to delete item number " + (pos+1) +"?");
                         final int positionToRemove = pos;
                         Context context = getApplicationContext();
                         adb.setNegativeButton("Cancel", null);
                         adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(context,"Item Removed!",Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,"The item has been removed!",Toast.LENGTH_SHORT).show();
                                 items.remove(positionToRemove);
                                 itemsAdapter.notifyDataSetChanged();
                             }});
@@ -85,15 +85,29 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void onAddItem(View v) {
+    public void onAddItem(View v){
         EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
         String itemText = etNewItem.getText().toString();
         Context context = getApplicationContext();
-        Toast.makeText(context,"Item Added!",Toast.LENGTH_LONG).show();
+        Toast.makeText(context,"The item has been added!",Toast.LENGTH_SHORT).show();
         itemsAdapter.add(itemText);
         etNewItem.setText("");
         writeItems();
     }
+
+//    public void onUpdateItem(View v) {
+//        EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
+//        String itemText = etNewItem.getText().toString();
+//        Context context = getApplicationContext();
+//        Toast.makeText(context,"Item Added!",Toast.LENGTH_LONG).show();
+//        itemsAdapter.add(itemText);
+//        etNewItem.setText("");
+//        writeItems();
+//
+//        etNewItem.add(editText.getText().toString());
+//        editText.setText("");
+//        adapter.notifyDataSetChanged();
+//    }
 
 //    public void onDeleteAllItems(View v,int position){
 //        EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
